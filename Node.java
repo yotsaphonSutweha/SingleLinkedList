@@ -1,7 +1,7 @@
 public class Node {
     private Object element;
     private Node next;
-    private Node prev;
+
 
     public Node(Object element, Node next) {
         this.element = element;
@@ -24,11 +24,5 @@ public class Node {
         this.next = next;
     }
 
-    public Node getPrev() {
-        return prev;
-    }
 
-    public void setPrev(Node prev) {
-        this.prev = prev;
-    }
 }

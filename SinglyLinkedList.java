@@ -19,6 +19,18 @@ public class SinglyLinkedList implements LinearList{
             current = current.getNext();
         }
     }
+
+    private void setCurrentByElement(Object givenElement){
+        current = head;
+        beforeCurr = null;
+        for(int i=1;i<size;i++){
+            beforeCurr = current;
+            current = current.getNext();
+            if(current.getElement().equals(givenElement)){
+                break;
+            }
+        }
+    }
     @Override
     public void add(int index, Object element) {
         if(index == 1) {
@@ -32,15 +44,49 @@ public class SinglyLinkedList implements LinearList{
             setCurrent(index-1);
             current.setNext(newNode);
 
-        }else{
-                // add before a given index
-                Node newNode = new Node(element, null);
-                setCurrent(index);
-                current.setPrev(newNode);
-                beforeCurr.setNext(newNode);
-                newNode.setNext(current);
         }
+
         size++;
+    }
+
+    @Override
+    public void addBeforeIndex(int index, Object element) {
+        Node newNode = new Node(element, null);
+        setCurrent(index);
+        beforeCurr.setNext(newNode);
+        newNode.setNext(current);
+        size++;
+    }
+
+    @Override
+    public void addAfterIndex(int index, Object element) {
+        Node newNode = new Node(element, null);
+        setCurrent(index);
+        Node afterCurr = current.getNext();
+        current.setNext(newNode);
+        newNode.setNext(afterCurr);
+        size++;
+
+    }
+
+    @Override
+    public void addAtIndex(int index, Object element) {
+        Node newNode = new Node(element, null);
+        setCurrent(index-1);
+        Node oldElement = current.getNext();
+        current.setNext(newNode);
+        newNode.setNext(oldElement);
+        size++;
+    }
+
+    @Override
+    public void addAfterElement(Object givenElement, Object newElement) {
+        Node newNode = new Node(newElement, null);
+        setCurrentByElement(givenElement);
+        System.out.println(current.getElement().toString());
+        Node afterCurr = current.getNext();
+        current.setNext(newNode);
+        newNode.setNext(afterCurr);
     }
 
     @Override
